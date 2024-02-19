@@ -120,4 +120,4 @@ console.log(sum); // 16
 
 ### Get
 
-`get` is a dirty way to grab a stores value outside a `.svelte` file by subscribing, grabbing the value and unsubscribing. This function is not included because with $state we can already grab the value without needing a subscription of any sort by simply accessing `store.value`;
+`get` is a dirty way to grab a stores value outside a `.svelte` file by subscribing, grabbing the value and unsubscribing. This function is not included because with $state we can already grab the value without needing a subscription of any sort by simply accessing `store.value`
