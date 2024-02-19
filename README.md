@@ -91,7 +91,7 @@ Library aimed to fully replace the `svelte/store` module by providing a powerful
 
 ```js
 function readable(init, start) {
-	const store = state(init, start);
+	const store = createState(init, start);
 	return {
 		get value() {
 			return store.value;
@@ -105,9 +105,9 @@ function readable(init, start) {
 `derived` is a powerful function to derive a value from one or multiple stores. This function is not included because the $derived rune already solves this for us, for example:
 
 ```js
-const storeA = state(5);
+const storeA = createState(5);
 
-const storeB = state(10);
+const storeB = createState(10);
 
 const sum = $derived(storeA.value + storeB.value);
 
