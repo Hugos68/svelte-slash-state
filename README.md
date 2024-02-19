@@ -7,33 +7,33 @@ Library aimed to fully replace the `svelte/store` module by providing a powerful
 ### Importing
 
 ```diff
-- import { writable } from 'svelte/store'
+- import { writable } from 'svelte/store';
 
-+ import { createState } from 'svelte-slash-state'
++ import { createState } from 'svelte-slash-state';
 ```
 
 ### Creating
 
 ```diff
-- const store = writable()
+- const store = writable();
 
-+ const store = createState()
++ const store = createState();
 ```
 
 ```diff
-- const store = writable(0)
+- const store = writable(0);
 
-+ const store = createState(0)
++ const store = createState(0);
 ```
 
 ```diff
 - const store = writable(0, (set, update) => {
 -    const interval = setInterval(() => {
 -        update((value) => {
--           value++
--           return value
--        })
--    }, 1000)
+-           value++;
+-           return value;
+-        });
+-    }, 1000);
 -    return () => clearInterval(interval)
 - });
 
@@ -48,39 +48,39 @@ Library aimed to fully replace the `svelte/store` module by providing a powerful
 ### Reading
 
 ```diff
-- let value
-- store.subscribe((newValue) => (value = newValue))
+- let value;
+- store.subscribe((newValue) => (value = newValue));
 
-+ store.value
++ store.value;
 ```
 
 ```diff
-- $store
+- $store;
 
-+ store.value
++ store.value;
 ```
 
 ```diff
-- get(store)
+- get(store);
 
-+ store.value
++ store.value;
 ```
 
 ### Writing
 
 ```diff
-- store.set(5)
+- store.set(5);
 
-+ store.value = 5
++ store.value = 5;
 ```
 
 ```diff
 - store.update((value) => {
--     value++
--     return value
-- })
+-     value++;
+-     return value;
+- });
 
-+ store.value++
++ store.value++;
 ```
 
 ## But where is X?
@@ -102,7 +102,7 @@ function readable(init, start) {
 
 ### Derived
 
-`derived` is a powerful to derive a value from one or multiple stores. This function is not included because the $derived rune already solves this for us, for example:
+`derived` is a powerful function to derive a value from one or multiple stores. This function is not included because the $derived rune already solves this for us, for example:
 
 ```js
 const storeA = state(5);
@@ -120,4 +120,4 @@ console.log(sum); // 16
 
 ### Get
 
-`get` is a dirty way to grab a stores value outside a `.svelte` file by subscribing, grabbing the value and unsubscribing. This is function is not included because with $state we can already grab the value without needing a subscription of any sort by simply accessing `store.value`;
+`get` is a dirty way to grab a stores value outside a `.svelte` file by subscribing, grabbing the value and unsubscribing. This function is not included because with $state we can already grab the value without needing a subscription of any sort by simply accessing `store.value`;
