@@ -20,14 +20,12 @@ export function createState<T>(
 		get value() {
 			if (start && $effect.active()) {
 				$effect(() => {
-					subscribers++;
-					if (subscribers === 1) {
+					if (++subscribers === 1) {
 						stop = start(this);
 					}
 					return () => {
 						tick().then(() => {
-							subscribers--;
-							if (subscribers === 0) {
+							if (--subscribers === 0) {
 								stop?.();
 								stop = null;
 							}
