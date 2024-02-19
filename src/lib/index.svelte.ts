@@ -4,12 +4,15 @@ export type StartStopNotifier<T> = (state: { value: T }) => (() => void) | void;
 
 export type State<T> = {
 	get value(): T;
-	set value(newValue: T);
+	set value(new_value: T);
 };
 
-export function state<T>(init: T, start?: StartStopNotifier<T>): State<T>;
-export function state<T>(): State<T | undefined>;
-export function state<T>(init?: T, start?: StartStopNotifier<T | undefined>): State<T | undefined> {
+export function createState<T>(init: T, start?: StartStopNotifier<T>): State<T>;
+export function createState<T>(): State<T | undefined>;
+export function createState<T>(
+	init?: T,
+	start?: StartStopNotifier<T | undefined>
+): State<T | undefined> {
 	let value = $state(init);
 	let stop: (() => void) | void | null = null;
 	let subscribers = 0;
@@ -34,8 +37,8 @@ export function state<T>(init?: T, start?: StartStopNotifier<T | undefined>): St
 			}
 			return value;
 		},
-		set value(newValue) {
-			value = newValue;
+		set value(new_value) {
+			value = new_value;
 		}
 	};
 }

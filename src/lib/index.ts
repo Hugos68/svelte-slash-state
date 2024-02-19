@@ -1,1 +1,1 @@
-export { state } from './index.svelte.js';
+export { createState } from './index.svelte.js';
