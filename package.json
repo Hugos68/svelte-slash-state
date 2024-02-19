@@ -1,6 +1,6 @@
 {
 	"name": "svelte-slash-state",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -19,7 +19,6 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"release": "pnpm run build && changeset publish"
-
 	},
 	"exports": {
 		".": {
