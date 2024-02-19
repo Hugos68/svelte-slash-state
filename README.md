@@ -2,6 +2,8 @@
 
 Library aimed to fully replace the `svelte/store` module by providing a powerful `createState` function.
 
+Credits to [Karim](https://github.com/karimfromjordan) for showcasing a startstopnotifier implementation using `$effect`.
+
 ## Replacing stores
 
 ### Importing
