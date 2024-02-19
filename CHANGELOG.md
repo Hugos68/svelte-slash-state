@@ -1,5 +1,12 @@
 # svelte-slash-state
 
+## 0.1.1
+
+### Patch Changes
+
+- ce8a19d: Doc typo fixes
+- 2a6faa9: More doc fixes
+
 ## 0.1.0
 
 ### Minor Changes
