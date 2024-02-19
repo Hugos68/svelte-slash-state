@@ -102,7 +102,7 @@ function readable(init, start) {
 
 ### Derived
 
-`derived` is a powerful function to derive a value from one or multiple stores. This function is not included because the $derived rune already solves this for us, for example:
+`derived` is a powerful function to derive a value from one or multiple stores. This function is not included because the `$derived` rune already solves this for us, for example:
 
 ```js
 const storeA = createState(5);
