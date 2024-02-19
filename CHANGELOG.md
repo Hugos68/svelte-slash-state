@@ -1,5 +1,11 @@
 # svelte-slash-state
 
+## 0.1.2
+
+### Patch Changes
+
+- adb9cf0: Simplified internal code a tat
+
 ## 0.1.1
 
 ### Patch Changes
