@@ -1,6 +1,6 @@
 # svelte-slash-state
 
-Library aimed to fully replace the `svelte/store` module by providing a powerful `State` class.
+Library aimed to fully replace the `svelte/store` module using runes.
 
 This library will remain to be maintained until velte with provide a built in solution (which I expect to happen).
 
