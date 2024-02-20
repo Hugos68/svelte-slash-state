@@ -1,5 +1,6 @@
 {
 	"name": "svelte-slash-state",
+	"description": "A library aiming to fully replace the `svelte/store` module using runes.",
 	"version": "0.2.1",
 	"license": "MIT",
 	"repository": {
