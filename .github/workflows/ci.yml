@@ -2,7 +2,7 @@ name: Continuous Integration
 on:
   push:
     branches: '*'
-    
+
 jobs:
   ci:
     runs-on: ubuntu-latest

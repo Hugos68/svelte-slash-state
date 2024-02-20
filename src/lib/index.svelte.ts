@@ -2,41 +2,39 @@ import { tick } from 'svelte';
 
 export type StartStopNotifier<T> = (state: { value: T }) => (() => void) | void;
 
-export type State<T> = {
-	get value(): T;
-	set value(new_value: T);
-};
+export class State<T> {
+	private internal_value = $state() as T;
+	private start: StartStopNotifier<T>;
+	private stop: ReturnType<StartStopNotifier<T>> | null;
+	private subscriber_count: number;
 
-export function createState<T>(init: T, start?: StartStopNotifier<T>): State<T>;
-export function createState<T>(): State<T | undefined>;
-export function createState<T>(
-	init?: T,
-	start?: StartStopNotifier<T | undefined>
-): State<T | undefined> {
-	let value = $state(init);
-	let stop: (() => void) | void | null = null;
-	let subscribers = 0;
-	return {
-		get value() {
-			if (start && $effect.active()) {
-				$effect(() => {
-					if (++subscribers === 1) {
-						stop = start(this);
-					}
-					return () => {
-						tick().then(() => {
-							if (--subscribers === 0) {
-								stop?.();
-								stop = null;
-							}
-						});
-					};
-				});
-			}
-			return value;
-		},
-		set value(new_value) {
-			value = new_value;
+	constructor(init?: T, start: StartStopNotifier<T> = () => {}) {
+		this.internal_value = init as T;
+		this.start = start;
+		this.stop = null;
+		this.subscriber_count = 0;
+	}
+
+	public get value() {
+		if ($effect.active()) {
+			$effect(() => {
+				if (++this.subscriber_count === 1) {
+					this.stop = this.start(this);
+				}
+				return () => {
+					tick().then(() => {
+						if (--this.subscriber_count === 0) {
+							this.stop?.();
+							this.stop = null;
+						}
+					});
+				};
+			});
 		}
-	};
+		return this.internal_value;
+	}
+
+	public set value(new_value: T) {
+		this.internal_value = new_value;
+	}
 }

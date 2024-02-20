@@ -15,10 +15,12 @@
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test": "vitest",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"release": "pnpm run build && changeset publish"
+		"release": "pnpm run build && changeset publish",
+		"ci-cd": "pnpm format && pnpm lint && pnpm test && pnpm build"
 	},
 	"exports": {
 		".": {

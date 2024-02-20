@@ -1,23 +1,31 @@
 import { describe, it, expect } from 'vitest';
-import { createState } from '../src/lib';
+import { State } from '../src/lib';
 import { tick } from 'svelte';
 
-describe('state', () => {
+describe('store', () => {
 	it('can be created', () => {
-		const store = createState();
+		const store = new State();
 
 		expect(store).toBeDefined();
 		expect(store).toHaveProperty('value');
 	});
-	it('can get a value', () => {
-		const store = createState(0);
+	it('can get its value', () => {
+		const store = new State(0);
 
 		expect(store.value).toBe(0);
 	});
-	it('can set a value', () => {
-		const store = createState(0);
+	it('can set its value', () => {
+		const store = new State(0);
 
 		store.value = 1;
+
+		expect(store.value).toBe(1);
+	});
+
+	it('can update its value', () => {
+		const store = new State(0);
+
+		store.value = store.value + 1;
 
 		expect(store.value).toBe(1);
 	});
@@ -25,7 +33,7 @@ describe('state', () => {
 		it('starts when the value is referenced in an effect', async () => {
 			let started = false;
 
-			const store = createState(0, () => {
+			const store = new State(0, () => {
 				started = true;
 			});
 
@@ -44,7 +52,7 @@ describe('state', () => {
 		it('stops when the value is no longer referenced in an effect', async () => {
 			let stopped = false;
 
-			const store = createState(0, () => {
+			const store = new State(0, () => {
 				return () => {
 					stopped = true;
 				};
@@ -70,7 +78,7 @@ describe('state', () => {
 			let startAmount = 0;
 
 			const cleanup = $effect.root(() => {
-				const store = createState(0, () => {
+				const store = new State(0, () => {
 					startAmount++;
 					return () => {
 						startAmount--;
@@ -93,6 +101,23 @@ describe('state', () => {
 			await tick();
 
 			expect(startAmount).toBe(0);
+		});
+		it('passes a writable reference of the store to the start function', async () => {
+			const store = new State(0, (store) => {
+				store.value = 1;
+			});
+
+			const cleanup = $effect.root(() => {
+				$effect(() => {
+					store.value;
+				});
+			});
+
+			await tick();
+
+			expect(store.value).toBe(1);
+
+			cleanup();
 		});
 	});
 });
