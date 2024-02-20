@@ -1,5 +1,12 @@
 # svelte-slash-state
 
+## 0.2.1
+
+### Patch Changes
+
+- cc228ef: Docs: Added `why` section, fixed some out of date docsd
+- 4acb1cf: Added `createState` function
+
 ## 0.2.0
 
 ### Minor Changes
