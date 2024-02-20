@@ -1,6 +1,6 @@
 import { tick } from 'svelte';
 
-export type StartStopNotifier<T> = (state: { value: T }) => (() => void) | void;
+type StartStopNotifier<T> = (state: { value: T }) => (() => void) | void;
 
 export class State<T> {
 	private internal_value = $state() as T;
@@ -37,4 +37,11 @@ export class State<T> {
 	public set value(new_value: T) {
 		this.internal_value = new_value;
 	}
+}
+
+export function createState<T>(
+	init?: ConstructorParameters<typeof State<T>>[0],
+	start?: ConstructorParameters<typeof State<T>>[1]
+) {
+	return new State<T>(init, start);
 }

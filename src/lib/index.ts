@@ -1,1 +1,1 @@
-export { State, type StartStopNotifier } from './index.svelte.js';
+export { State, createState } from './index.svelte.js';
