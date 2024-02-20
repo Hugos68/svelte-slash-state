@@ -1,5 +1,11 @@
 # svelte-slash-state
 
+## 0.2.0
+
+### Minor Changes
+
+- 982c425: Breaking: Converted function `createState` to now be class: `new State`
+
 ## 0.1.2
 
 ### Patch Changes
